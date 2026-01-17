@@ -4,7 +4,7 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 
 # ===== FILE SETTINGS =====
-BASENAME = "in2"                          # Input filename without extension
+BASENAME = "in3"                          # Input filename without extension
 EXTENSIONS = ["jpg", "jpeg", "png"]      # Allowed input extensions
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -59,12 +59,18 @@ def generateImage():
     draw = ImageDraw.Draw(img)
 
     # === UTC TIME ===
-    now_utc = datetime.utcnow()
-    timestamp_text = now_utc.strftime("%Y-%m-%d %H:%M:%S UTC")
-    timestamp_file = now_utc.strftime("%Y-%m-%d_%H-%M-%S_UTC")
+    
+    # === FIXED UTC (STRING → DATETIME) ===
+    UTC_INPUT = "2026-01-17 09:30:00"
+    UTC_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+    dt_utc = datetime.strptime(UTC_INPUT, UTC_FORMAT)
+
+    timestamp_text = dt_utc.strftime("%Y-%m-%d %H:%M:%S UTC")
+    timestamp_file = dt_utc.strftime("%Y-%m-%d_%H-%M-%S_UTC")
 
     # Label text (full UTC timestamp)
-    label_text = f"Sun | WL | {timestamp_text}"
+    label_text = f"Sun | WL | {timestamp_text} | Bartlomiej Bielecki"
 
     # Scale font and margin to image height
     font_size = int(img.height * TEXT_HEIGHT_RATIO)
