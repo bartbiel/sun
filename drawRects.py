@@ -156,5 +156,5 @@ process_image(
     line_color=(255, 0, 0), 
     text_color=(255, 0, 0), 
     font_size=24, 
-    saveFlag=False 
+    saveFlag=True 
     )
