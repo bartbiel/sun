@@ -4,8 +4,8 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 
 # ===== FILE SETTINGS =====
-BASENAME = "in3"                          # Input filename without extension
-EXTENSIONS = ["jpg", "jpeg", "png"]      # Allowed input extensions
+#BASENAME = "in6"                          # Input filename without extension
+EXTENSIONS = ["jpg", "jpeg", "png", "bmp"]      # Allowed input extensions
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(BASE_DIR, "resources", "in")
@@ -49,7 +49,7 @@ def load_font(font_path, font_size):
         return ImageFont.load_default()
 
 
-def generateImage():
+def generateImage(BASENAME, UTC_INPUT):
     # Ensure output directory exists
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -61,8 +61,7 @@ def generateImage():
     # === UTC TIME ===
     
     # === FIXED UTC (STRING → DATETIME) ===
-    UTC_INPUT = "2026-01-17 09:30:00"
-    UTC_FORMAT = "%Y-%m-%d %H:%M:%S"
+    UTC_FORMAT = "%Y-%m-%d %H:%M"
 
     dt_utc = datetime.strptime(UTC_INPUT, UTC_FORMAT)
 
@@ -70,7 +69,11 @@ def generateImage():
     timestamp_file = dt_utc.strftime("%Y-%m-%d_%H-%M-%S_UTC")
 
     # Label text (full UTC timestamp)
-    label_text = f"Sun | WL | {timestamp_text} | Bartlomiej Bielecki"
+    label_text = (f"Bartlomiej Bielecki | Sun | WL \n"
+    f"{timestamp_text} \n"                  
+    "Sky-Watcher 90/900 | ZWO ASI 462MM | IR-cut \n"
+    "FireCapture | AutoStakkert! | ImPPG"
+    )
 
     # Scale font and margin to image height
     font_size = int(img.height * TEXT_HEIGHT_RATIO)
@@ -85,7 +88,7 @@ def generateImage():
     # Bottom-left position
     x = margin
     y = img.height - text_height - margin
-
+    #y = text_height - margin # dla zajetego lewey dol 
     # Shadow for Facebook compression
     shadow_offset = max(1, font_size // 15)
     draw.text(

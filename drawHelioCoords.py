@@ -116,3 +116,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    detect_edges()
+
+(cx,cy,R) = fit_circle(edges)
+
+for lat in range(-80,80,10):
+    for lon in range(-90,90):
+        X = R*cos(lat)*sin(lon)
+        Y = R*sin(lat)
+        Z = R*cos(lat)*cos(lon)
+
+        if Z > 0:
+            px = cx + X
+            py = cy - Y
+            draw(px,py)
