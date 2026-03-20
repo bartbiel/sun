@@ -144,13 +144,12 @@ def process_image(
         result.show()
 # ===== EXAMPLE =====
 if __name__ == "__main__": boxes = [ 
-    {"bbox": (385, 561, 544, 720), "text": "4392"}, 
-    {"bbox": (186, 274, 339, 360), "text": "4395"}, 
-    {"bbox": (1305, 78, 1459, 147), "text": "4393"} 
+    {"bbox": (172, 487, 343, 631), "text": "4392"} 
+   
     ]
 
 process_image( 
-    filename="1803X", 
+    filename="1903X", 
     boxes=boxes, 
     line_thickness=4, 
     line_color=(255, 0, 0), 
